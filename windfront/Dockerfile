@@ -26,4 +26,4 @@ RUN \
     curl -sSLf -O "https://github.com/Nerivec/zigbee2mqtt-windfront/releases/download/${WINDFRONT_VERSION}/zigbee2mqtt-windfront-${WINDFRONT_VERSION}.tar.gz" \
     && tar -C /usr/share/nginx/html/ --strip-components=1 -xf "zigbee2mqtt-windfront-${WINDFRONT_VERSION}.tar.gz" \
     && rm -rf "zigbee2mqtt-windfront-${WINDFRONT_VERSION}.tar.gz" \
-    # && chown -R nginx:nginx /usr/share/nginx/html/
+    && chown -R root:root /usr/share/nginx/html/
