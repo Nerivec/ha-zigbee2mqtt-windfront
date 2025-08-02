@@ -28,6 +28,9 @@ bashio::log.info "API names: $Z2M_API_NAMES"
 # find the file with the template envs
 envs=$(ls -t /usr/share/nginx/html/assets/envs*.js | head -n1)
 
+bashio::log.info "$(ls -ahl /usr/share/nginx/html/assets/envs*.js)"
+bashio::log.info "$(whoami)"
+
 envsubst < "$envs" > ./envs_temp
 cat ./envs_temp > "$envs"
 rm ./envs_temp
