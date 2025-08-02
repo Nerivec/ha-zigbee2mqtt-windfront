@@ -28,8 +28,8 @@ profile example flags=(attach_disconnected,mediate_deleted) {
   /data/** rw,
 
   # Access to served files
-  /usr/share/nginx/html/** r,
-  /usr/share/nginx/html/assets/envs*.js rw,
+  /usr/share/nginx/html/** rw,
+  # /usr/share/nginx/html/assets/envs*.js rw,
 
   # Start new profile for service
   /usr/sbin/nginx cx -> nginx,
@@ -47,9 +47,9 @@ profile example flags=(attach_disconnected,mediate_deleted) {
     /share/** rw,
 
     # Access to served files
-    /usr/share/nginx/html/** r,
+    /usr/share/nginx/html/** rw,
     # XXX: not needed?
-    /usr/share/nginx/html/assets/envs*.js rw,
+    # /usr/share/nginx/html/assets/envs*.js rw,
 
     # Access required for service functionality
     # Note: List was built by doing the following:
