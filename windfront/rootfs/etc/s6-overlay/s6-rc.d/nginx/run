@@ -29,7 +29,7 @@ bashio::log.info "API names: $Z2M_API_NAMES"
 envs=$(ls -t /usr/share/nginx/html/assets/envs*.js | head -n1)
 
 envsubst < "$envs" > ./envs_temp
-cp ./envs_temp "$envs"
+cp -f ./envs_temp "$envs"
 rm ./envs_temp
 
 # start server
