@@ -1,0 +1,37 @@
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Start the windfront service
+# s6-overlay docs: https://github.com/just-containers/s6-overlay
+# ==============================================================================
+# shellcheck disable=SC2155
+
+set -e
+
+Z2M_API_URLS="$(bashio::config 'api_urls')"
+Z2M_API_NAMES="$(bashio::config 'api_names')"
+
+if [[ -z "$Z2M_API_URLS" ]]; then
+bashio::exit.nok "Zigbee2MQTT API URLs (api_urls) is empty"
+fi
+
+if [[ -z "$Z2M_API_NAMES" ]]; then
+bashio::exit.nok "Zigbee2MQTT API names (api_names) is empty"
+fi
+
+export Z2M_API_URLS
+export Z2M_API_NAMES
+
+bashio::log.info "API URLs: $Z2M_API_URLS"
+bashio::log.info "API names: $Z2M_API_NAMES"
+
+# find the file with the template envs
+envs=$(ls -t /usr/share/nginx/html/assets/envs*.js | head -n1)
+
+envsubst < "$envs" > ./envs_temp
+cp ./envs_temp "$envs"
+rm ./envs_temp
+
+# start server
+bashio::log.info "Running nginx..."
+exec nginx -c /etc/nginx/nginx.conf < /dev/null

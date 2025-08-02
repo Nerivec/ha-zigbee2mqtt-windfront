@@ -1,4 +1,4 @@
 # https://developers.home-assistant.io/docs/add-ons/repository#repository-configuration
-name: Example Home Assistant add-on repository
-url: 'https://github.com/home-assistant/addons-example'
-maintainer: Awesome Maintainer <awesome@example.com>
+name: 'Home Assistant Add-on: Zigbee2MQTT WindFront'
+url: 'https://github.com/Nerivec/ha-zigbee2mqtt-windfront'
+maintainer: Nerivec
