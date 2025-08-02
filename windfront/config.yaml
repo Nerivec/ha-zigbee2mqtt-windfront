@@ -1,0 +1,25 @@
+# https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
+name: Zigbee2MQTT WindFront
+version: "1.5.2"
+slug: windfront
+description: Zigbee2MQTT WindFront standalone frontend
+url: "https://github.com/Nerivec/ha-zigbee2mqtt-windfront/tree/main/windfront"
+panel_icon: "mdi:zigbee"
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+  - i386
+init: false
+ingress: true
+map:
+  - share:rw
+options:
+  api_urls: ""
+  api_names: ""
+schema:
+  api_urls: str
+  api_names: str
+image: "ghcr.io/nerivec/ha-zigbee2mqtt-windfront-{arch}"
+breaking_versions: []
