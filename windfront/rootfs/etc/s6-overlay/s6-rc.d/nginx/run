@@ -1,7 +1,7 @@
 #!/usr/bin/with-contenv bashio
 # shellcheck shell=bash
 # ==============================================================================
-# Start the windfront service
+# Start the nginx service
 # s6-overlay docs: https://github.com/just-containers/s6-overlay
 # ==============================================================================
 # shellcheck disable=SC2155
