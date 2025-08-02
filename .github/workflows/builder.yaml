@@ -101,7 +101,7 @@ jobs:
           fi
 
       - name: Set build arguments
-        if: (steps.check.outputs.build_arch == 'true' && github.event_name == "push")
+        if: (steps.check.outputs.build_arch == 'true' && github.event_name == 'push')
         run: |
           echo "BUILD_ARGS=--docker-hub-check" >> $GITHUB_ENV;
 
