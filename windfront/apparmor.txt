@@ -48,6 +48,7 @@ profile example flags=(attach_disconnected,mediate_deleted) {
 
     # Access to served files
     /usr/share/nginx/html/** r,
+    # XXX: not needed?
     /usr/share/nginx/html/assets/envs*.js rw,
 
     # Access required for service functionality
