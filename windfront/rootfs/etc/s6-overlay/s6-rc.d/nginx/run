@@ -8,6 +8,8 @@
 
 set -e
 
+bashio::log.info "Configuring nginx..."
+
 Z2M_API_URLS="$(bashio::config 'api_urls')"
 Z2M_API_NAMES="$(bashio::config 'api_names')"
 
@@ -19,18 +21,16 @@ if [[ -z "$Z2M_API_NAMES" ]]; then
     bashio::exit.nok "Zigbee2MQTT API names (api_names) is empty"
 fi
 
-bashio::log.info "Configuring nginx..."
-
 export Z2M_API_URLS
 export Z2M_API_NAMES
 
-bashio::log.info "API URLs: $Z2M_API_URLS"
-bashio::log.info "API names: $Z2M_API_NAMES"
+bashio::log.info "Setting WindFront envs..."
+bashio::log.info "  - API URLs: $Z2M_API_URLS"
+bashio::log.info "  - API names: $Z2M_API_NAMES"
 
 # find the file with the template envs
 envs=$(ls -t /var/www/windfront/assets/envs*.js | head -n1)
 
-bashio::log.info "Setting WindFront envs..."
 envsubst < "$envs" > ./envs_temp
 cat ./envs_temp > "$envs"
 rm ./envs_temp
