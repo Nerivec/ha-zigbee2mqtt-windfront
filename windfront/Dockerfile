@@ -16,7 +16,8 @@ RUN \
   # && adduser -S -D -H -u 101 -h /var/cache/nginx -s /sbin/nologin -G nginx -g nginx nginx \
   && apk --no-cache add nginx gettext-envsubst tzdata \
   && mkdir -p /run/nginx \
-  && mkdir -p /usr/share/nginx/html
+  && mkdir -p /usr/share/nginx/html \
+  && mkdir -p /var/lib/nginx/
 
 # Copy root filesystem
 COPY rootfs /
