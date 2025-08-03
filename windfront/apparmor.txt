@@ -1,6 +1,6 @@
 #include <tunables/global>
 
-profile example flags=(attach_disconnected,mediate_deleted) {
+profile windfront flags=(attach_disconnected,mediate_deleted) {
   #include <abstractions/base>
 
   # Capabilities
@@ -63,7 +63,5 @@ profile example flags=(attach_disconnected,mediate_deleted) {
     /run/nginx/** rw,
     /var/lib/nginx/** rw,
     /dev/tty rw,
-    /bin/** ix,
-    /usr/bin/** ix,
   }
 }
