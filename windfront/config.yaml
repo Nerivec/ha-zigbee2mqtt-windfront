@@ -14,7 +14,7 @@ arch:
 init: false
 ingress: true
 map:
-  - share:rw
+  - addon_config:rw
 options:
   api_urls: ""
   api_names: ""

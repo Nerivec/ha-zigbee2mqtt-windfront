@@ -16,8 +16,7 @@ RUN \
   # && adduser -S -D -H -u 101 -h /var/cache/nginx -s /sbin/nologin -G nginx -g nginx nginx \
   && apk --no-cache add nginx gettext-envsubst tzdata \
   && mkdir -p /run/nginx \
-  && mkdir -p /usr/share/nginx/html \
-  && mkdir -p /var/lib/nginx/
+  && mkdir -p /usr/share/nginx/html
 
 # Copy root filesystem
 COPY rootfs /
@@ -27,4 +26,4 @@ RUN \
     curl -sSLf -O "https://github.com/Nerivec/zigbee2mqtt-windfront/releases/download/${WINDFRONT_VERSION}/zigbee2mqtt-windfront-${WINDFRONT_VERSION}.tar.gz" \
     && tar -C /usr/share/nginx/html/ --strip-components=1 -xf "zigbee2mqtt-windfront-${WINDFRONT_VERSION}.tar.gz" \
     && rm -rf "zigbee2mqtt-windfront-${WINDFRONT_VERSION}.tar.gz" \
-    && chown -R root:root /usr/share/nginx/html/ /var/lib/nginx/
+    && chown -R root:root /usr/share/nginx/html/
