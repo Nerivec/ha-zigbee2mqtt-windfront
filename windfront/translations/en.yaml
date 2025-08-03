@@ -1,0 +1,8 @@
+---
+configuration:
+  api_urls:
+    name: API URLs
+    description: The comma-separated WebSocket URLs of the targeted Zigbee2MQTT instances (each should end with "/api").
+  api_names:
+    name: API Names
+    description: The comma-separated names associated with the URLs (expected in same order). Will be used as labels in the interface.

@@ -32,6 +32,7 @@ envsubst < "$envs" > ./envs_temp
 # TODO: START remove me debug
 bashio::log.info "$(ls -ahl /usr/share/nginx/html/assets/envs*.js)"
 bashio::log.info "$(ls -ahl ./envs_temp)"
+bashio::log.info "$(ls -ahl /etc/nginx)"
 bashio::log.info "$(whoami)"
 # TODO: END remove me debug
 cat ./envs_temp > "$envs"
