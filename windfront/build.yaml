@@ -11,5 +11,4 @@ labels:
   org.opencontainers.image.source: "https://github.com/Nerivec/ha-zigbee2mqtt-windfront"
   org.opencontainers.image.licenses: "Apache License 2.0"
 args:
-  TEMPIO_VERSION: "2021.09.0"
   WINDFRONT_VERSION: "v1.5.2"
