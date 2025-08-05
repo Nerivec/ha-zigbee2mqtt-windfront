@@ -22,7 +22,7 @@ events {
 }
 
 http {
-    include /etc/nginx/includes/mime.types;
+    include /etc/nginx/mime.types;
 
     access_log           off;
     client_max_body_size 4G;
