@@ -30,6 +30,6 @@ You can switch Zigbee2MQTT instances (as configured above) using the top right c
 
 ## Update the add-on
 
-Copy your settings on add-on configuration page.
-Uninstall and re-install the add-on.
-Re-add your settings in add-on configuration page.
+- Copy your settings on add-on configuration page.
+- Uninstall and re-install the add-on.
+- Re-add your settings in add-on configuration page.
