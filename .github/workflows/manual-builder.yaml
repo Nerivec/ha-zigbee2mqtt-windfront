@@ -1,10 +1,16 @@
-name: Edge Builder
+name: Manual Builder
 
 env:
   REGISTRY: ghcr.io
 
 on:
   workflow_dispatch:
+    inputs:
+      addon_folder:
+        description: "The folder of the add-on to build"
+        required: true
+        default: "windfront_edge"
+        type: string
 
 permissions:
   contents: read
@@ -12,7 +18,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Build windfront_edge add-on
+    name: Build ${{ inputs.addon_folder }} add-on
     strategy:
       matrix:
         arch: ["aarch64", "amd64", "armhf", "armv7", "i386"]
@@ -26,7 +32,7 @@ jobs:
         id: info
         uses: home-assistant/actions/helpers/info@master
         with:
-          path: "./windfront_edge"
+          path: "./${{ inputs.addon_folder }}"
 
       - name: Check if add-on should be built
         id: check
@@ -38,7 +44,7 @@ jobs:
             echo "build_arch=true" >> $GITHUB_OUTPUT;
             echo "image=$(echo ${{ steps.info.outputs.image }} | cut -d'/' -f3)" >> $GITHUB_OUTPUT;
           else
-            echo "${{ matrix.arch }} is not a valid arch for windfront_edge, skipping build";
+            echo "${{ matrix.arch }} is not a valid arch for ${{ inputs.addon_folder }}, skipping build";
             echo "build_arch=false" >> $GITHUB_OUTPUT;
           fi
 
@@ -50,13 +56,13 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build windfront_edge add-on
+      - name: Build ${{ inputs.addon_folder }} add-on
         if: steps.check.outputs.build_arch == 'true'
         uses: home-assistant/builder@2025.03.0
         with:
           args: |
             --${{ matrix.arch }} \
-            --target /data/windfront_edge \
+            --target /data/${{ inputs.addon_folder }} \
             --image "${{ steps.check.outputs.image }}" \
             --docker-hub "${{ env.REGISTRY }}/${{ github.repository_owner }}" \
             --addon
