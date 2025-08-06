@@ -1,0 +1,25 @@
+# https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
+name: Zigbee2MQTT WindFront Edge
+version: "edge"
+breaking_versions: []
+slug: windfront_edge
+description: Development version
+url: "https://github.com/Nerivec/ha-zigbee2mqtt-windfront/tree/main/windfront-edge"
+panel_icon: "mdi:zigbee"
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+  - i386
+image: "ghcr.io/nerivec/ha-zigbee2mqtt-windfront-edge-{arch}"
+init: false
+ingress: true
+map:
+  - addon_config:rw
+options:
+  api_urls: ""
+  api_names: ""
+schema:
+  api_urls: str
+  api_names: str
