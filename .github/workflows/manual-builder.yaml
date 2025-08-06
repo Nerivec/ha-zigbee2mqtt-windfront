@@ -10,7 +10,8 @@ on:
         description: "The folder of the add-on to build"
         required: true
         default: "windfront_edge"
-        type: string
+        type: choice
+        options: ["windfront", "windfront_edge"]
 
 permissions:
   contents: read
