@@ -1,6 +1,4 @@
-<!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
+## v1.5.2
 
-## 1.5.2
-
-- Initial release
+- Initial add-on release
 - [WindFront release notes](https://github.com/Nerivec/zigbee2mqtt-windfront/releases/tag/v1.5.2)
