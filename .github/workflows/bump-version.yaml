@@ -40,6 +40,13 @@ jobs:
         run: |
           sed -i -E 's/^  ${{ inputs.arg_name }}_VERSION: .*$/  ${{ inputs.arg_name }}_VERSION: "${{ inputs.version }}"/g' ./${{ inputs.addon_folder }}/build.yaml
 
+          addonFolderLower=$(echo "${{ inputs.addon_folder }}" | tr '[:upper:]' '[:lower:]')
+          argNameLower=$(echo "${{ inputs.arg_name }}" | tr '[:upper:]' '[:lower:]')
+
+          if [[ "$addonFolderLower" == "$argNameLower" ]]; then
+            sed -i -E 's/^version: .*$/version: "${{ inputs.version }}"/g' ./${{ inputs.addon_folder }}/config.yaml
+          fi
+
           if [[ -z "${{ inputs.changelog }}" ]]; then
             echo "No changelog to write"
           else
