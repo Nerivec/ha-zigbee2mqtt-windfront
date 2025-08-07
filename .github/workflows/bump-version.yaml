@@ -56,10 +56,11 @@ jobs:
           git commit -m "$title" || echo 'Nothing to commit'
           git push origin "$branch"
 
-          gh pr create \
-            --title "$title" \
-            --body "${{ inputs.changelog }}" \
+          echo -e "${{ inputs.changelog }}" | gh pr create \
+            --fill \
             --base main \
-            --head $branch
+            --head $branch \
+            --title "$title" \
+            --body-file -
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
