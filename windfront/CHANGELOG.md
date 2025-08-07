@@ -1,3 +1,7 @@
+## v99.99.9999
+
+- test
+
 ## v1.6.0
 
 - [WindFront release notes](https://github.com/Nerivec/zigbee2mqtt-windfront/releases/tag/v1.6.0)
