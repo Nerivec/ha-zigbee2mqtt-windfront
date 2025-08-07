@@ -58,7 +58,7 @@ jobs:
 
           gh pr create \
             --title "$title" \
-            --body "${{ inputs.changelog }}" \
+            --body "$(echo '${{ inputs.changelog }}' | sed 's/\\n/\\r\\n/g')" \
             --base main \
             --head $branch
         env:
