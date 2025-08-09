@@ -10,7 +10,7 @@ on:
         type: choice
         options: ["windfront"]
       arg_name:
-        description: "The name of the version bump (without '_VERSION')"
+        description: "The name of the version to bump (without '_VERSION')"
         required: true
         default: "WINDFRONT"
         type: string
