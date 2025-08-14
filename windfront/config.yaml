@@ -1,6 +1,6 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
 name: Zigbee2MQTT WindFront
-version: "v1.8.0"
+version: "v1.8.1"
 breaking_versions: []
 slug: windfront
 description: Zigbee2MQTT WindFront standalone frontend
