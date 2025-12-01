@@ -7,11 +7,8 @@ description: Zigbee2MQTT WindFront standalone frontend
 url: "https://github.com/Nerivec/ha-zigbee2mqtt-windfront/tree/main/windfront"
 panel_icon: "mdi:zigbee"
 arch:
-  - armhf
-  - armv7
   - aarch64
   - amd64
-  - i386
 image: "ghcr.io/nerivec/ha-zigbee2mqtt-windfront-{arch}"
 init: false
 ingress: true
