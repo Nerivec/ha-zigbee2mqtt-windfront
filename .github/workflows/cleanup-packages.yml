@@ -1,0 +1,41 @@
+name: Cleanup packages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  REGISTRY: ghcr.io
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+      - uses: actions/delete-package-versions@v5
+        with:
+          package-name: "ha-zigbee2mqtt-windfront-amd64"
+          package-type: "container"
+          min-versions-to-keep: 50
+          delete-only-untagged-versions: "true"
+      - uses: actions/delete-package-versions@v5
+        with:
+          package-name: "ha-zigbee2mqtt-windfront-aarch64"
+          package-type: "container"
+          min-versions-to-keep: 50
+          delete-only-untagged-versions: "true"
+      - uses: actions/delete-package-versions@v5
+        with:
+          package-name: "ha-zigbee2mqtt-windfront-edge-amd64"
+          package-type: "container"
+          min-versions-to-keep: 50
+          delete-only-untagged-versions: "true"
+      - uses: actions/delete-package-versions@v5
+        with:
+          package-name: "ha-zigbee2mqtt-windfront-edge-aarch64"
+          package-type: "container"
+          min-versions-to-keep: 50
+          delete-only-untagged-versions: "true"
