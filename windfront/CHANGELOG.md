@@ -1,3 +1,7 @@
+## v2.8.0
+
+- [WindFront release notes](https://github.com/Nerivec/zigbee2mqtt-windfront/releases/tag/v2.8.0)
+
 ## v2.7.0
 
 - [WindFront release notes](https://github.com/Nerivec/zigbee2mqtt-windfront/releases/tag/v2.7.0)
