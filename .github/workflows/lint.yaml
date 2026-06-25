@@ -15,20 +15,20 @@ permissions:
 
 jobs:
   find:
-    name: Find add-ons
+    name: Find apps
     runs-on: ubuntu-latest
     outputs:
       addons: ${{ steps.addons.outputs.addons_list }}
     steps:
       - name: ⤵️ Check out code from GitHub
-        uses: actions/checkout@v7
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
-      - name: 🔍 Find add-on directories
+      - name: 🔍 Find app directories
         id: addons
-        uses: home-assistant/actions/helpers/find-addons@master
+        uses: home-assistant/actions/helpers/find-addons@f4ca6f671bd429efb108c0f2fa0ae8af0215986c
 
   lint:
-    name: Lint add-on ${{ matrix.path }}
+    name: Lint app ${{ matrix.path }}
     runs-on: ubuntu-latest
     needs: find
     strategy:
@@ -36,9 +36,9 @@ jobs:
         path: ${{ fromJson(needs.find.outputs.addons) }}
     steps:
       - name: ⤵️ Check out code from GitHub
-        uses: actions/checkout@v7
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
-      - name: 🚀 Run Home Assistant Add-on Lint
-        uses: frenck/action-addon-linter@v2
+      - name: 🚀 Run Home Assistant App Lint
+        uses: frenck/action-addon-linter@f995494fd84fae6310d23617e66d0e37de4f14eb # v2.21.0
         with:
           path: "./${{ matrix.path }}"

@@ -15,25 +15,25 @@ jobs:
     permissions:
       packages: write
     steps:
-      - uses: actions/delete-package-versions@v5
+      - uses: actions/delete-package-versions@e5bc658cc4c965c472efe991f8beea3981499c55 # v5.0.0
         with:
           package-name: "ha-zigbee2mqtt-windfront-amd64"
           package-type: "container"
           min-versions-to-keep: 50
           delete-only-untagged-versions: "true"
-      - uses: actions/delete-package-versions@v5
+      - uses: actions/delete-package-versions@e5bc658cc4c965c472efe991f8beea3981499c55 # v5.0.0
         with:
           package-name: "ha-zigbee2mqtt-windfront-aarch64"
           package-type: "container"
           min-versions-to-keep: 50
           delete-only-untagged-versions: "true"
-      - uses: actions/delete-package-versions@v5
+      - uses: actions/delete-package-versions@e5bc658cc4c965c472efe991f8beea3981499c55 # v5.0.0
         with:
           package-name: "ha-zigbee2mqtt-windfront-edge-amd64"
           package-type: "container"
           min-versions-to-keep: 50
           delete-only-untagged-versions: "true"
-      - uses: actions/delete-package-versions@v5
+      - uses: actions/delete-package-versions@e5bc658cc4c965c472efe991f8beea3981499c55 # v5.0.0
         with:
           package-name: "ha-zigbee2mqtt-windfront-edge-aarch64"
           package-type: "container"
