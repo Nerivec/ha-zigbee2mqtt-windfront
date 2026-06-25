@@ -34,11 +34,11 @@ jobs:
       pull-requests: write
     steps:
       - name: Check out repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       - name: Bump version & write changelog
         run: |
-          sed -i -E 's/^  ${{ inputs.arg_name }}_VERSION: .*$/  ${{ inputs.arg_name }}_VERSION: "${{ inputs.version }}"/g' ./${{ inputs.addon_folder }}/build.yaml
+          sed -i -E 's/^ARG ${{ inputs.arg_name }}_VERSION=.*$/ARG ${{ inputs.arg_name }}_VERSION=${{ inputs.version }}/g' ./${{ inputs.addon_folder }}/Dockerfile
 
           addonFolderLower=$(echo "${{ inputs.addon_folder }}" | tr '[:upper:]' '[:lower:]')
           argNameLower=$(echo "${{ inputs.arg_name }}" | tr '[:upper:]' '[:lower:]')
@@ -69,5 +69,7 @@ jobs:
             --head $branch \
             --title "$title" \
             --body-file -
+
+          gh pr merge $branch --squash --auto --delete-branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

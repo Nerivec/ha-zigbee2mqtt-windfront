@@ -1,8 +1,6 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-dockerfile
-ARG BUILD_FROM
-FROM $BUILD_FROM
-
-ARG WINDFRONT_VERSION
+ARG BUILD_FROM=ghcr.io/home-assistant/base:3.23
+FROM ${BUILD_FROM}
 
 # ignore cache for below layers when latest commit changes
 ADD "https://api.github.com/repos/Nerivec/zigbee2mqtt-windfront/branches/built-main" latest_commit
@@ -15,4 +13,11 @@ RUN \
     && rm -rf "built-main.tar.gz" /tmp/* /etc/nginx \
     && chown -R root:root /var/www/windfront
 
+# Copy root filesystem
 COPY rootfs /
+
+LABEL \
+    org.opencontainers.image.title="Home Assistant Add-on: Zigbee2MQTT WindFront Edge" \
+    org.opencontainers.image.description="Development version." \
+    org.opencontainers.image.source="https://github.com/Nerivec/ha-zigbee2mqtt-windfront" \
+    org.opencontainers.image.licenses="Apache License 2.0"

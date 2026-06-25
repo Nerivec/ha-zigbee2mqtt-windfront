@@ -9,7 +9,7 @@ panel_icon: "mdi:zigbee"
 arch:
   - aarch64
   - amd64
-image: "ghcr.io/nerivec/ha-zigbee2mqtt-windfront-edge-{arch}"
+image: "ghcr.io/nerivec/ha-zigbee2mqtt-windfront-edge"
 init: false
 ingress: true
 map:
