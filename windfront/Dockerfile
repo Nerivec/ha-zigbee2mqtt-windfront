@@ -2,7 +2,7 @@
 ARG BUILD_FROM=ghcr.io/home-assistant/base:3.23
 FROM ${BUILD_FROM}
 
-ARG WINDFRONT_VERSION=v2.12.0
+ARG WINDFRONT_VERSION=v2.12.1
 
 RUN \
     apk --no-cache add nginx gettext-envsubst tzdata \
