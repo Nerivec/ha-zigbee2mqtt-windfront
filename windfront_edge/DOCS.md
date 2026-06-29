@@ -1,4 +1,4 @@
-# Home Assistant Add-on: Zigbee2MQTT WindFront Edge
+# Home Assistant App: Zigbee2MQTT WindFront Edge
 
 ## How to use
 
@@ -20,7 +20,7 @@ localhost:5173/api,localhost:8181/api
 dev,base
 ```
 
-Go back to "Info" tab and start the add-on.
+Go back to "Info" tab and start the app.
 
 Open the Web UI. _Optionally toggle "Show in sidebar" for quick access._
 
@@ -28,8 +28,8 @@ You can switch Zigbee2MQTT instances (as configured above) using the top right c
 
 > _The color of the icon on the button indicates the status on the underlaying WebSocket. Red means error/disconnected, if that happens after the initial load, make sure the configured URL is valid and your connection is stable._
 
-## Update the add-on
+## Update the app
 
-- Copy your settings on add-on configuration page.
-- Uninstall and re-install the add-on.
-- Re-add your settings in add-on configuration page.
+- Copy your settings on app configuration page.
+- Uninstall and re-install the app.
+- Re-add your settings in app configuration page.

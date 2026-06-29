@@ -3,8 +3,8 @@ name: Bump version
 on:
   workflow_dispatch:
     inputs:
-      addon_folder:
-        description: "The folder of the add-on to version bump"
+      app:
+        description: "The folder of the app to version bump"
         required: true
         default: "windfront"
         type: choice
@@ -28,7 +28,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Bump ${{ inputs.addon_folder }} add-on ${{ inputs.arg_name }} to ${{ inputs.version }}
+    name: Bump ${{ inputs.app }} app ${{ inputs.arg_name }} to ${{ inputs.version }}
     permissions:
       contents: write
       pull-requests: write
@@ -38,23 +38,23 @@ jobs:
 
       - name: Bump version & write changelog
         run: |
-          sed -i -E 's/^ARG ${{ inputs.arg_name }}_VERSION=.*$/ARG ${{ inputs.arg_name }}_VERSION=${{ inputs.version }}/g' ./${{ inputs.addon_folder }}/Dockerfile
+          sed -i -E 's/^ARG ${{ inputs.arg_name }}_VERSION=.*$/ARG ${{ inputs.arg_name }}_VERSION=${{ inputs.version }}/g' ./${{ inputs.app }}/Dockerfile
 
-          addonFolderLower=$(echo "${{ inputs.addon_folder }}" | tr '[:upper:]' '[:lower:]')
+          appFolderLower=$(echo "${{ inputs.app }}" | tr '[:upper:]' '[:lower:]')
           argNameLower=$(echo "${{ inputs.arg_name }}" | tr '[:upper:]' '[:lower:]')
 
-          if [[ "$addonFolderLower" == "$argNameLower" ]]; then
-            sed -i -E 's/^version: .*$/version: "${{ inputs.version }}"/g' ./${{ inputs.addon_folder }}/config.yaml
+          if [[ "$appFolderLower" == "$argNameLower" ]]; then
+            sed -i -E 's/^version: .*$/version: "${{ inputs.version }}"/g' ./${{ inputs.app }}/config.yaml
           fi
 
           if [[ -z "${{ inputs.changelog }}" ]]; then
             echo "No changelog to write"
           else
-            echo -e "${{ inputs.changelog }}\n\n$(cat ./${{ inputs.addon_folder }}/CHANGELOG.md)" > ./${{ inputs.addon_folder }}/CHANGELOG.md
+            echo -e "${{ inputs.changelog }}\n\n$(cat ./${{ inputs.app }}/CHANGELOG.md)" > ./${{ inputs.app }}/CHANGELOG.md
           fi
 
-          branch="${{ inputs.addon_folder }}-${{ inputs.arg_name }}-${{ inputs.version }}"
-          title="fix: bump ${{ inputs.addon_folder }} add-on ${{ inputs.arg_name }} to ${{ inputs.version }}"
+          branch="${{ inputs.app }}-${{ inputs.arg_name }}-${{ inputs.version }}"
+          title="fix: bump ${{ inputs.app }} app ${{ inputs.arg_name }} to ${{ inputs.version }}"
 
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'

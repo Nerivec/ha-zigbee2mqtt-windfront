@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       app:
-        description: "The folder of the add-on to build"
+        description: "The folder of the app to build"
         required: true
         default: "windfront_edge"
         type: choice

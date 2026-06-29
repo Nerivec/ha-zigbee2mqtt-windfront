@@ -1,4 +1,4 @@
-# Home Assistant Add-on: Zigbee2MQTT WindFront
+# Home Assistant App: Zigbee2MQTT WindFront
 
 ## How to use
 
@@ -20,7 +20,7 @@ localhost:5173/api,localhost:8181/api
 dev,base
 ```
 
-Go back to "Info" tab and start the add-on.
+Go back to "Info" tab and start the app.
 
 Open the Web UI. _Optionally toggle "Show in sidebar" for quick access._
 
