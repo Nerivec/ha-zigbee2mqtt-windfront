@@ -30,7 +30,7 @@ jobs:
 
       - name: Get app information
         id: info
-        uses: home-assistant/actions/helpers/info@f4ca6f671bd429efb108c0f2fa0ae8af0215986c
+        uses: home-assistant/actions/helpers/info@ab22029681aa532bfe7de5774a9972d67bfbd2c0
         with:
           path: "./${{ inputs.app }}"
 
