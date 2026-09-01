@@ -25,7 +25,7 @@ jobs:
 
       - name: 🔍 Find app directories
         id: apps
-        uses: home-assistant/actions/helpers/find-addons@ab22029681aa532bfe7de5774a9972d67bfbd2c0
+        uses: home-assistant/actions/helpers/find-addons@a7c616ce81ccda50150bf1595786c71b1883fabb
 
   lint:
     name: Lint app ${{ matrix.path }}
