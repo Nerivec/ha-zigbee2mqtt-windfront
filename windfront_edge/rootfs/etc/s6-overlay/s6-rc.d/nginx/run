@@ -23,6 +23,82 @@ fi
 
 export Z2M_API_URLS
 export Z2M_API_NAMES
+
+# Zigbee2MQTT `frontend.auth_token` per instance. nginx adds it to each proxied WebSocket, so the
+# browser never holds a token: Home Assistant's login (ingress) is the only gate.
+# One token applies to every URL; several must match `api_urls` in order (empty = none for that URL).
+Z2M_TOKENS_CONF="/etc/nginx/z2m-tokens.conf"
+Z2M_WS_PROXY_LOG_CONF="/etc/nginx/z2m-ws-proxy-log.conf"
+Z2M_HOST_RE='^[][a-z0-9.:-]+$'
+
+declare -A z2m_host_tokens=()
+
+if bashio::config.has_value 'api_tokens'; then
+    # the extra comma keeps a trailing empty field (bash `read` drops one otherwise)
+    IFS=',' read -r -a z2m_urls <<< "$Z2M_API_URLS,"
+    IFS=',' read -r -a z2m_tokens <<< "$(bashio::config 'api_tokens'),"
+
+    if [[ ${#z2m_tokens[@]} -ne 1 && ${#z2m_tokens[@]} -ne ${#z2m_urls[@]} ]]; then
+        bashio::exit.nok "Zigbee2MQTT API tokens (api_tokens) must be one token, or one per URL in api_urls"
+    fi
+
+    for i in "${!z2m_urls[@]}"; do
+        token="${z2m_tokens[0]}"
+
+        if [[ ${#z2m_tokens[@]} -gt 1 ]]; then
+            token="${z2m_tokens[$i]}"
+        fi
+
+        if [[ -z "$token" ]]; then
+            continue
+        fi
+
+        # same form as the host WindFront puts in the ws-proxy path (`new URL(...).host`)
+        host="${z2m_urls[$i]%%/*}"
+        host="${host,,}"
+        host="${host%:80}"
+
+        if [[ -z "$host" ]]; then
+            continue
+        fi
+
+        if [[ ! "$host" =~ $Z2M_HOST_RE ]]; then
+            bashio::exit.nok "Zigbee2MQTT API URL #$((i + 1)) has an invalid host: ${host}"
+        fi
+
+        # percent-encode (UTF-8), so the value is safe in the query string and in the nginx config
+        encoded="$(jq -rn --arg t "$token" '$t | @uri')"
+
+        if [[ -n "${z2m_host_tokens[$host]+set}" ]]; then
+            if [[ "${z2m_host_tokens[$host]}" != "$encoded" ]]; then
+                bashio::exit.nok "Zigbee2MQTT API URLs on the same host (${host}) must use the same token"
+            fi
+
+            continue
+        fi
+
+        z2m_host_tokens[$host]="$encoded"
+        bashio::log.info "  - API token set for: ${host}"
+    done
+fi
+
+{
+    echo "map \$backend_host \$z2m_token {"
+    echo "    default \"\";"
+
+    for host in "${!z2m_host_tokens[@]}"; do
+        echo "    \"${host}\" \"${z2m_host_tokens[$host]}\";"
+    done
+
+    echo "}"
+} > "$Z2M_TOKENS_CONF"
+
+# nginx logs the upstream URL, query string included, on proxy errors: keep tokens out of the app log
+if [[ ${#z2m_host_tokens[@]} -gt 0 ]]; then
+    echo "error_log /proc/1/fd/1 crit;" > "$Z2M_WS_PROXY_LOG_CONF"
+else
+    : > "$Z2M_WS_PROXY_LOG_CONF"
+fi
 export USE_PROXY="true"
 
 bashio::log.info "Setting WindFront envs..."

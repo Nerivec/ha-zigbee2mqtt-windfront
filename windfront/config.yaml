@@ -17,6 +17,8 @@ map:
 options:
   api_urls: ""
   api_names: ""
+  api_tokens: ""
 schema:
   api_urls: str
   api_names: str
+  api_tokens: password?

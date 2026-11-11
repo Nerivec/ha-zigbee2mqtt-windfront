@@ -6,3 +6,6 @@ configuration:
   api_names:
     name: API Names
     description: The comma-separated names associated with the URLs (expected in same order). Will be used as labels in the interface.
+  api_tokens:
+    name: API Tokens
+    description: Optional. The Zigbee2MQTT frontend auth token (frontend.auth_token), added to the connection by the app so no browser needs it. One token for all URLs, or comma-separated in the same order as the URLs (leave a position empty for an instance without a token).

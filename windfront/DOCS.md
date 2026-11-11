@@ -20,6 +20,15 @@ localhost:5173/api,localhost:8181/api
 dev,base
 ```
 
+`api_tokens` _(optional)_
+
+Set this if your Zigbee2MQTT instances require a frontend auth token (`frontend.auth_token`). The app adds the token to each WebSocket connection itself, so no browser needs it: access is controlled by the Home Assistant login. One token is used for every URL. For different tokens, give one per URL in the same order as `api_urls` (leave a position empty for an instance without a token):
+```
+tokenA,tokenB,
+```
+
+> _Tokens cannot contain commas, and URLs on the same host must use the same token. While tokens are set, the app does not log WebSocket proxy errors, because nginx would include the token in them._
+
 Go back to "Info" tab and start the app.
 
 Open the Web UI. _Optionally toggle "Show in sidebar" for quick access._
